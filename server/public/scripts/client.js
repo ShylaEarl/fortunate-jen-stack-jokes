@@ -5,6 +5,7 @@ $( document ).ready( onReady );
 function onReady() {
     console.log('DOM ready');
     //will load joke history on page load
+
     getJokes();
 }
 
@@ -31,7 +32,7 @@ function renderJokes(response){
     for(let item of response){
         $('#outputDiv').append(`
             <ul>
-                <li>${item.whoseJoke} ${item.jokeQuestion} ${item.punchline}</li>
+                <li>${item.whoseJoke} ${item.jokeQuestion} ${item.punchLine}</li>
             </ul>
         `);
     }//end for of loop
