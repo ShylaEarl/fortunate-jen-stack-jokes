@@ -42,7 +42,7 @@ app.get('/jokeBook', (req, res) => {
   res.send(jokes);
 });
 
-//post request receives new jokes from client/browser 
+//post request receives new jokes from client/browser as req.body
 app.post('/jokeBook', (req, res) => {
   console.log('in post. req.body', req.body);
   //and pushes them into the joke history array
