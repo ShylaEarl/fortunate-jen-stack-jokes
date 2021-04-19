@@ -5,9 +5,14 @@ $( document ).ready( onReady );
 function onReady() {
     console.log('DOM ready');
     //will load joke history on page load
-
     getJokes();
+    $('#addJokeButton').on('click', postJoke);
 }
+
+function postJoke(){
+    console.log('in post, button clicked');
+    
+}//end postJoke 
 
 //get joke history from server
 function getJokes(){
