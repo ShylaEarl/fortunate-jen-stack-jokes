@@ -6,19 +6,45 @@ function onReady() {
     console.log('DOM ready');
     //will load joke history on page load
     getJokes();
+    //hey jQ, on click of the button with the id of addJokeButton run postJoke
     $('#addJokeButton').on('click', postJoke);
 }
 
+//captures input values, bundles them into an object...
 function postJoke(){
-    console.log('in post, button clicked');
-    
+    //console.log('in post, button clicked');
+    let jokeObject = {
+        whoseJoke: $('#whoseJokeIn').val(),
+        jokeQuestion: $('#questionIn').val(),
+        punchLine: $('#punchlineIn').val()
+    }
+    //and sends them to the sever via POST request...
+    $.ajax({
+        method: 'POST',
+        url: '/jokeBook',
+        data: jokeObject
+    })
+    //and calls getJokes functions to get the joke history back from the server
+    .then(function(response){
+        console.log('response', response);
+        getJokes();
+    })
+    .catch(function(error){
+        console.log('in post', error);
+        alert('error in POST');
+    });
+
+    //resets input fields to empty strings
+    $('#whoseJokeIn').val('');
+    $('#questionIn').val('');
+    $('#punchlineIn').val('');
 }//end postJoke 
 
 //get joke history from server
 function getJokes(){
     $.ajax({
         method: 'GET',
-        url: '/jokeList'
+        url: '/jokeBook'
     })
         .then(function(response){
             //and render to client/browser

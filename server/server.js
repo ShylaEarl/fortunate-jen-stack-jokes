@@ -37,11 +37,18 @@ let jokes = [
 // serve back static files
 app.use(express.static('server/public'));
 
-app.get('/jokeList', (req, res) => {
+//get request sends joke history to client/browser
+app.get('/jokeBook', (req, res) => {
   res.send(jokes);
-})
+});
 
-app.post('/jokeList')
+//post request receives new jokes from client/browser 
+app.post('/jokeBook', (req, res) => {
+  console.log('in post. req.body', req.body);
+  //and pushes them into the joke history array
+  jokes.push(req.body);
+  res.sendStatus(201);
+});
 
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
